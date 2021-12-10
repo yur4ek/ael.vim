@@ -52,7 +52,7 @@ syn match	aelExtensionSingle	".*;" contained contains=@aelStatement skipwhite
 
 
 " Dialplan Statements (priorities)
-syn cluster	aelStatement		contains=aelSet,aelApplication,aelIfWhile,aelFor,aelElse,aelSwitch,aelGoto,aelMacroCall
+syn cluster	aelStatement		contains=aelSet,aelApplication,aelIfWhile,aelIfTime,aelFor,aelElse,aelSwitch,aelGoto,aelMacroCall
 
 syn match	aelSet			"\<Set\ze\s*(" contained nextgroup=aelSetOpenParen skipwhite
 syn match	aelSetOpenParen		"(" contained nextgroup=aelSetVariable skipwhite
@@ -83,6 +83,9 @@ syn match	aelSwitchCase		"\<case\>" contained nextgroup=aelSwitchCaseVal skipwhi
 syn match	aelSwitchCaseVal	"\s*\zs.*\ze:" contained contains=aelInterpol,aelExpr
 syn match	aelSwitchDefault	"\<default\ze:" contained
 syn keyword	aelSwitchBreak		break contained
+
+syn match aelIfTime     "\<ifTime\>" contained nextgroup=aelIfTimeCond skipwhite
+syn match aelIfTimeCond		"(.*)" contained contains=aelString nextgroup=aelIfWhileBlock,aelElse skipwhite
 
 syn match	aelGoto			"\<goto\>" contained nextgroup=aelGotoTarget skipwhite
 syn match	aelGotoTarget		"\(\([0-9A-Za-z_*${:}-]\+|\)\=[0-9A-Za-z_*${:}-]\+|\)\=[0-9A-Za-z_*${:}-]\+" contained contains=aelInterpol,aelGotoPipe
@@ -118,6 +121,7 @@ hi def link 	aelIfWhile		aelConditional
 hi def link 	aelElse			aelConditional
 hi def link 	aelFor			aelConditional
 hi def link 	aelSwitch		aelConditional
+hi def link 	aelIfTime		aelConditional
 hi def link	aelConditional		Conditional
 hi def link	aelSwitchCase		aelLabel
 hi def link	aelSwitchDefault	aelLabel
