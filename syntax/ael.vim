@@ -52,7 +52,7 @@ syn match	aelExtensionSingle	".*;" contained contains=@aelStatement skipwhite
 
 
 " Dialplan Statements (priorities)
-syn cluster	aelStatement		contains=aelSet,aelApplication,aelIfWhile,aelIfTime,aelFor,aelElse,aelSwitch,aelGoto,aelMacroCall
+syn cluster	aelStatement		contains=aelSet,aelApplication,aelIfWhile,aelIfTime,aelFor,aelElse,aelSwitch,aelGoto,aelMacroCall,aelVar
 
 syn match	aelSet			"\<Set\ze\s*(" contained nextgroup=aelSetOpenParen skipwhite
 syn match	aelSetOpenParen		"(" contained nextgroup=aelSetVariable skipwhite
@@ -94,6 +94,8 @@ syn match	aelGotoPipe		"|" contained
 syn match	aelMacroCall		"&\h[0-9A-Za-z_-]*\>" contained nextgroup=aelMacroCallParms skipwhite
 syn match	aelMacroCallParms	"(.*)" contained contains=aelInterpol,aelString,aelExpr skipwhite
 
+syn match	aelVar		"\<\h[0-9A-Za-z_-]*\ze\s*=" contained nextgroup=aelGlobalVarExpression
+syn match	aelVarExpression	".*;" contained contains=aelInterpol,aelExpr,aelString
 
 " Generic
 syn match	aelLabel		"\<\h[0-9A-Za-z_-]*\ze:" contained
